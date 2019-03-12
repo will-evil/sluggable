@@ -1,18 +1,8 @@
-# Sluggable
-Package for creating slugs from structure fields.
-
-## Installation
-````bash
-go get github.com/will-evil/sluggable
-````
-
-## Usage
-````go
-package main
+package sluggable_test
 
 import (
-    "fmt"
-    "github.com/will-evil/sluggable"
+	"fmt"
+	"sluggable"
 )
 
 // Post hast title to represent a post.
@@ -57,4 +47,3 @@ func isSlugExists(slug string) bool {
 
 	return true
 }
-````

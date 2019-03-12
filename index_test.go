@@ -1,24 +1,25 @@
-package sluggable
+package sluggable_test
 
 import (
 	"reflect"
+	"sluggable"
 	"testing"
 )
 
-type sluggable struct {
+type Sluggable struct {
 }
 
-func (s sluggable) IsSlugUnique(slug string) (bool, error) {
+func (s Sluggable) IsSlugUnique(slug string) (bool, error) {
 	return true, nil
 }
 
-func (s sluggable) SlugLang() (string, error) {
+func (s Sluggable) SlugLang() (string, error) {
 	return "en", nil
 }
 
 func TestCreateSlug(t *testing.T) {
 	type Post struct {
-		sluggable
+		Sluggable
 		Title string `sluggable:"1"`
 	}
 
@@ -45,7 +46,7 @@ func TestCreateSlug(t *testing.T) {
 	}
 
 	for _, testSet := range testList {
-		slug, err := CreateSlug(testSet.obj)
+		slug, err := sluggable.CreateSlug(testSet.obj)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -57,7 +58,7 @@ func TestCreateSlug(t *testing.T) {
 
 func TestCreateSlug2(t *testing.T) {
 	type Post struct {
-		sluggable
+		Sluggable
 		Title string `sluggable:"1"`
 		Year  uint   `sluggable:"2"`
 	}
@@ -73,7 +74,7 @@ func TestCreateSlug2(t *testing.T) {
 	}
 
 	for _, testSet := range testList {
-		slug, err := CreateSlug(testSet.obj)
+		slug, err := sluggable.CreateSlug(testSet.obj)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -85,7 +86,7 @@ func TestCreateSlug2(t *testing.T) {
 
 func TestCreateSlug3(t *testing.T) {
 	type Post struct {
-		sluggable
+		Sluggable
 		Year  uint   `sluggable:"2"`
 		Title string `sluggable:"1"`
 	}
@@ -101,7 +102,7 @@ func TestCreateSlug3(t *testing.T) {
 	}
 
 	for _, testSet := range testList {
-		slug, err := CreateSlug(testSet.obj)
+		slug, err := sluggable.CreateSlug(testSet.obj)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -178,7 +179,7 @@ func TestValToStr(t *testing.T) {
 		value := reflect.ValueOf(testSet.val)
 		valType := reflect.TypeOf(testSet.val).Kind()
 
-		strVal, err := valToStr(value, valType)
+		strVal, err := sluggable.ValToStr(value, valType)
 		if err != nil {
 			t.Fatal(err)
 		}

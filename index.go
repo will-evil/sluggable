@@ -1,3 +1,7 @@
+// Package for creating slug.
+//
+// Slug can be created from the structure corresponding to the Sluggabler interface
+// using the function CreateSlug or from any structure using function MakeSlug.
 package sluggable
 
 import (
@@ -30,6 +34,7 @@ func CreateSlug(obj Sluggabler) (string, error) {
 	return MakeSlug(obj, slugLang, obj.IsSlugUnique)
 }
 
+// MakeSlug makes slug for obj use isUnique for check slug uniqueness.
 func MakeSlug(obj interface{}, language string, isUnique UniqueFunc) (string, error) {
 	counter := defCount
 
@@ -58,6 +63,7 @@ func MakeSlug(obj interface{}, language string, isUnique UniqueFunc) (string, er
 	}
 }
 
+// slugBricks create a slice with elements for creating slug.
 func slugBricks(obj interface{}) ([]string, error) {
 	type Brick struct {
 		index uint64
@@ -101,6 +107,7 @@ func slugBricks(obj interface{}) ([]string, error) {
 	return result, nil
 }
 
+// valToStr convert value to string and return string value and error if is convert not possible.
 func valToStr(value reflect.Value, kind reflect.Kind) (string, error) {
 	switch kind {
 	case reflect.String:
