@@ -22,15 +22,15 @@ func (p Post) SlugLang() (string, error) {
 
 // ExampleCreateSlug create slug from post.
 func ExampleCreateSlug() {
-	post := Post{Title: "dogs & cats"}
+	post := Post{Title: "Mr. Sherlock Holmes & Dr. Watson"}
 
 	slug, err := sluggable.CreateSlug(post)
 	if err != nil {
 		panic(err)
 	}
 
-	// dogs-and-cats
 	fmt.Println(slug)
+	// Output: mr-sherlock-holmes-and-dr-watson
 }
 
 func isSlugExists(slug string) bool {
